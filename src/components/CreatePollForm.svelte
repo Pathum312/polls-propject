@@ -1,4 +1,6 @@
 <script>
+    import Button from '../shared/Button.svelte';
+
     let formData = {
         question: '',
         answerA: '',
@@ -23,7 +25,7 @@
         <label for="answer-b">PAnswer B</label>
         <input type="text" id="answer-b" bind:value={formData.answerB} />
     </div>
-    <button>Add Poll</button>
+    <Button type="secondary" flat={true}>Add Poll</Button>
 </form>
 
 <style>
