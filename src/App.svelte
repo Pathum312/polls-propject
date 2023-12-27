@@ -20,13 +20,25 @@
         console.log(polls);
         activeTab = 'Current Polls';
     };
+
+    const handleVote = (voteData) => {
+        const { option, id } = voteData.detail;
+
+        let copiedPolls = [...polls];
+        let updatedPoll = copiedPolls.find((poll) => poll.id == id);
+
+        if (option === 'a') updatedPoll.voteA++;
+        if (option === 'b') updatedPoll.voteB++;
+
+        polls = copiedPolls;
+    };
 </script>
 
 <Header />
 <main>
     <Tabs {tabs} {activeTab} on:tabChange={tabChange} />
     {#if activeTab === 'Current Polls'}
-        <PollList {polls} />
+        <PollList {polls} on:vote={handleVote} />
     {:else if activeTab === 'Add New Poll'}
         <CreatePollForm on:add={handleAddPoll} />
     {/if}
