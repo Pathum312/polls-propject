@@ -1,18 +1,19 @@
 <script>
     import Button from '../shared/Button.svelte';
+    import { createEventDispatcher } from 'svelte';
+    import pollStore from '../stores/PollStores';
 
     let formData = {
         question: '',
         answerA: '',
         answerB: '',
     };
-
     let errors = {
         question: '',
         answerA: '',
         answerB: '',
     };
-
+    let disptach = createEventDispatcher();
     let isValid = false;
 
     const submitPoll = () => {
@@ -38,7 +39,12 @@
 
         // Add New Poll
         if (isValid) {
-            console.log('Valid', formData);
+            let poll = { ...formData, voteA: 0, voteB: 0, id: Math.random() };
+            // Updating poll store
+            pollStore.update((currentPolls) => {
+                return [poll, ...currentPolls];
+            });
+            disptach('add');
         }
     };
 </script>

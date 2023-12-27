@@ -3,6 +3,7 @@
     import Footer from './components/Footer.svelte';
     import CreatePollForm from './components/CreatePollForm.svelte';
     import Tabs from './shared/Tabs.svelte';
+    import PollList from './components/PollList.svelte';
 
     // Tabs Management
     let tabs = ['Current Polls', 'Add New Poll'];
@@ -11,15 +12,31 @@
     const tabChange = (tab) => {
         activeTab = tab.detail;
     };
+
+    const handleAddPoll = () => {
+        activeTab = 'Current Polls';
+    };
+
+    const handleVote = (voteData) => {
+        const { option, id } = voteData.detail;
+
+        let copiedPolls = [...polls];
+        let updatedPoll = copiedPolls.find((poll) => poll.id == id);
+
+        if (option === 'a') updatedPoll.voteA++;
+        if (option === 'b') updatedPoll.voteB++;
+
+        polls = copiedPolls;
+    };
 </script>
 
 <Header />
 <main>
     <Tabs {tabs} {activeTab} on:tabChange={tabChange} />
     {#if activeTab === 'Current Polls'}
-        <p>Poll List</p>
+        <PollList />
     {:else if activeTab === 'Add New Poll'}
-        <CreatePollForm />
+        <CreatePollForm on:add={handleAddPoll} />
     {/if}
 </main>
 <Footer />
