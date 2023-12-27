@@ -8,7 +8,6 @@
     // Tabs Management
     let tabs = ['Current Polls', 'Add New Poll'];
     let activeTab = 'Current Polls';
-    let polls = [];
 
     const tabChange = (tab) => {
         activeTab = tab.detail;
@@ -38,7 +37,7 @@
 <main>
     <Tabs {tabs} {activeTab} on:tabChange={tabChange} />
     {#if activeTab === 'Current Polls'}
-        <PollList {polls} on:vote={handleVote} />
+        <PollList on:vote={handleVote} />
     {:else if activeTab === 'Add New Poll'}
         <CreatePollForm on:add={handleAddPoll} />
     {/if}
