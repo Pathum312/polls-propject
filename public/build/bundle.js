@@ -1016,7 +1016,7 @@ var app = (function () {
     			header = element("header");
     			h1 = element("h1");
     			img = element("img");
-    			if (!src_url_equal(img.src, img_src_value = "/img/poll_ninja_logo.svg")) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = "./img/poll_ninja_logo.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "poll-logo");
     			attr_dev(img, "class", "svelte-bafoua");
     			add_location(img, file$8, 4, 8, 45);
